@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&family=Work+Sans:wght@100;200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/syles/style.css" type="text/css" />
+  </head>
+
+  <body style="padding: 60px 20px">
+    <div class="container">
+      <h1 class="mb-4">Loan Details</h1>
+      <div class="row">
+        <% details.forEach(detail => {%>
+        <div class="col-12">
+          <div class="card mt-4" style="border-radius: 20px">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-4">
+                  <img
+                    src="https://api.adorable.io/avatars/128/avatar.png"
+                    alt=""
+                    class="img-fluid"
+                    style="border-radius: 100px"
+                  />
+                </div>
+                <div class="col-8">
+                  <h4>
+                    <div class="card-title"><%= detail.name %></div>
+                  </h4>
+                </div>
+              </div>
+              <hr />
+              <div class="card-text mb-2"><%= detail.about %></div>
+              <div class="row mt-4">
+                <div class="col-6">
+                  <div class="card-subtitle">
+                    Customer Id: <%= detail.id.toUpperCase() %>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="card-subtitle">Loan Id: <%= detail.loanId %></div>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col-6">
+                  Total Loan Amount: ₹ <% var amount =
+                  detail.loanAmount.replace( /,/g, ''); var formatter = new
+                  Intl.NumberFormat('en-IN', { style: 'currency', currency:
+                  'INR', });%> <%= formatter.format(amount) %>
+                </div>
+                <div class="col-6">
+                  EMI: <% var emi = (detail.loanAmount.replace( /,/g, '') /
+                  48).toFixed(0); var formatter = new Intl.NumberFormat('en-IN',
+                  { style: 'currency', currency: 'INR', }); var amount = emi; %>
+                  <%= formatter.format(amount) %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&family=Work+Sans:wght@100;200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/syles/style.css" type="text/css" />
+  </head>
+
+  <body style="padding: 60px 20px">
+    <div class="container">
+      <h1 class="mb-4">Customer Details</h1>
+      <div class="row">
+        <div class="col-4">
+          <form class="form-inline" action="/loan/search/custId" method="POST">
+            <div class="form-group mx-md-3 mb-2">
+              <label for="custId" class="sr-only">Customer Id</label>
+              <input
+                type="text"
+                class="form-control"
+                id="custId"
+                name="custId"
+                placeholder="Customer Id"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Go</button>
+          </form>
+        </div>
+        <div class="col-4">
+          <form class="form-inline" action="/loan/search/loanId" method="POST">
+            <div class="form-group mx-md-3 mb-2">
+              <label for="loanId" class="sr-only">Loan Id</label>
+              <input
+                type="text"
+                class="form-control"
+                id="loanId"
+                name="loanId"
+                placeholder="Loan Id"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Go</button>
+          </form>
+        </div>
+        <div class="col-4">
+          <form
+            class="form-inline"
+            action="/loan/search/custName"
+            method="POST"
+          >
+            <div class="form-group mx-md-3 mb-2">
+              <label for="custName" class="sr-only">Customer Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="custName"
+                name="custName"
+                placeholder="Customer Name"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Go</button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <% loanData.forEach(detail => {%>
+        <div class="col-6">
+          <div class="card mt-4" style="border-radius: 20px">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2">
+                  <img
+                    src="https://api.adorable.io/avatars/128/avatar.png"
+                    alt=""
+                    class="img-fluid"
+                    style="border-radius: 100px"
+                  />
+                </div>
+                <div class="col-10">
+                  <h4>
+                    <a href="/loan/details/<%= detail.loanId %>">
+                      <div class="card-title"><%= detail.name %></div>
+                    </a>
+                  </h4>
+                </div>
+              </div>
+              <hr />
+              <div class="card-subtitle text-muted mb-2">
+                Customer Id: <%= detail.id.toUpperCase() %>
+              </div>
+              <div class="card-subtitle text-muted mb-2">
+                Loan Id: <%= detail.loanId %>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="card-text mb-2">
+                    Total Loan Amount: ₹ <%= detail.loanAmount %>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="card-text mb-2">
+                    EMI: ₹ <% var emi = (detail.loanAmount.replace( /,/g, '') /
+                    48).toFixed(0); var formatter = new
+                    Intl.NumberFormat('en-IN', { style: 'currency', currency:
+                    'INR', }); var amount = emi; %> <%= formatter.format(amount)
+                    %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>

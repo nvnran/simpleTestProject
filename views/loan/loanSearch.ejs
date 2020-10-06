@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&family=Work+Sans:wght@100;200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/syles/style.css" type="text/css" />
+  </head>
+
+  <body style="padding: 60px 20px">
+    <div class="container">
+      <h1 class="mb-4">Search Results</h1>
+      <div class="row">
+        <% details.forEach(detail => {%>
+        <div
+          class="col-12 card"
+          style="border-radius: 20px; padding: 20px 30px"
+        >
+          <div class="row">
+            <div class="col-2">
+              <img
+                src="https://api.adorable.io/avatars/128/avatar.png"
+                alt=""
+                class="img-fluid"
+                style="border-radius: 100px"
+              />
+            </div>
+            <div class="col-10">
+              <div class="mt-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-8">
+                      <h4>
+                        <a href="/loan/details/<%= detail.loanId %>">
+                          <div class="card-title"><%= detail.name %></div>
+                        </a>
+                      </h4>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      Total Loan Amount: ₹ <% var amount =
+                      detail.loanAmount.replace( /,/g, ''); var formatter = new
+                      Intl.NumberFormat('en-IN', { style: 'currency', currency:
+                      'INR', });%> <%= formatter.format(amount) %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>
