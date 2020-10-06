@@ -6,13 +6,6 @@ const loanRouter = require('./routes/loan');
 const loanData = require('./data/loanData');
 const app = express();
 
-mongoose.connect(
-  'mongodb+srv://nvnran:CrazyDude%40132@nvnran-db.ozqjd.mongodb.net/webdevtuts?retryWrites=true&w=majority',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
 app.use(express.static(path.join(__dirname, 'assets')));
 
 app.set('view engine', 'ejs');
